@@ -1,0 +1,7 @@
+<h2>Some workouts</h2>
+<div class="trainings-menu">
+  <a *ngFor="let training of trainings"
+    routerLink="/detail/{{training.id}}">
+    {{training.type}}
+  </a>
+</div>

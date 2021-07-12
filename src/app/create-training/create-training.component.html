@@ -1,0 +1,28 @@
+<p>Create new training session</p>
+<div>
+    <div>
+    <label for="new-training">Training duration in hours: </label>
+    <input type="number" id="new-training" min=0 value=0 #trainingDuration />
+    </div>
+    <div>
+    <label for="new-training">Training day: </label>
+    <select 
+            #trainingDay>
+            <<option *ngFor="let dayOfWeek of weekDays" [value]="dayOfWeek">
+                    {{dayOfWeek}}
+            </option>
+    </select>
+  </div>
+  <div>
+    <label for="new-training">Type of training: </label>
+    <div *ngFor="let trainType of typesOfTraining">
+            <input type="radio" [(ngModel)]="selectedType"   name="options" [value]="trainType" >
+            <label>{{trainType}}</label>
+        
+    </div>
+  </div>
+    <!-- (click) passes input value to add() and then clears the input -->
+    <button class="add-button" (click)="add(trainingDuration.value, trainingDay.value, selectedType)">
+      Add training
+    </button>
+</div>
