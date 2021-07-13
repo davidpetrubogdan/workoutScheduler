@@ -104,7 +104,7 @@
   .modal-content {
   /* position: relative; */
   top:0;
-  background-color: gray;
+  background-color: rgba(76, 175, 80, 0.3);
   margin: 5% auto;
   padding: 20px;
   border: 1px solid #888;
@@ -113,4 +113,19 @@
   border-radius: 50px;
   border-color: black;
   font-family: "Poppins", sans-serif;
+  }
+  button {
+    /* margin-top: 20px; */
+    background-color: #eee;
+    padding: 1rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+  }
+  button:hover {
+    background-color: #cfd8dc;
+  }
+  button:disabled {
+    background-color: #eee;
+    color: #ccc;
+    cursor: auto;
   }

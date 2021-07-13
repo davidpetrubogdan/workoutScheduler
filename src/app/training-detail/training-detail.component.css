@@ -52,3 +52,18 @@
     margin-right: .8em;
     border-radius: 4px 0 0 4px;
   }
+  button {
+    margin-top: 20px;
+    background-color: #eee;
+    padding: 1rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+  }
+  button:hover {
+    background-color: #cfd8dc;
+  }
+  button:disabled {
+    background-color: #eee;
+    color: #ccc;
+    cursor: auto;
+  }

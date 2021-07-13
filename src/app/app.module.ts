@@ -11,6 +11,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CreateTrainingComponent } from './create-training/create-training.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';  
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     NgbModule,
     HttpClientModule,
     AppRoutingModule,

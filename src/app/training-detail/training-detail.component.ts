@@ -18,6 +18,8 @@ export class TrainingDetailComponent implements OnInit {
 
   save(): void{
     if(this.trainingSession){
+      const hours = this.trainingSession.hours;
+     if (!hours || hours<=0) { console.log("The duration must be a number");return; }
       this.trainingService.updateTraining(this.trainingSession)
         .subscribe(()=> this.goBack());
     }

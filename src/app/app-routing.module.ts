@@ -9,8 +9,8 @@ const routes: Routes = [
   {path:'trainings', component: TrainingsComponent},
   {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
   {path:'dashboard', component: DashboardComponent},
-  {path: 'detail/:id', component: TrainingDetailComponent},
-  {path: 'new', component: CreateTrainingComponent}
+  {path: 'edit/:id', component: TrainingDetailComponent},
+  {path: 'add', component: CreateTrainingComponent}
 ];
 imports: [ RouterModule.forRoot(routes) ]
 exports: [RouterModule]

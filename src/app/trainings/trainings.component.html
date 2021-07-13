@@ -14,7 +14,7 @@
 <h2>My Workouts</h2>
 <ul class="trainingSessions">
     <li *ngFor="let trainingSession of trainingSessions" >
-        <a routerLink="/detail/{{trainingSession.id}}">
+        <a routerLink="/edit/{{trainingSession.id}}">
         <span class="badge">{{trainingSession.id}}</span> {{trainingSession.type}} completed on {{trainingSession.day}}
         </a>
         <button class="delete" title="delete training"
@@ -26,12 +26,12 @@
 <div class="backdrop"> 
 <div class="modal-content">
  <div class="miniHeader">
-  <div class="modal-header">    
+  <!-- <div class="modal-header">    
       <h4 class="modal-title" id="modal-basic-title">Confirmation</h4>    
       <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">    
           <span aria-hidden="true">×</span>    
       </button>    
-  </div>    
+  </div>     -->
   <div class="modal-body">    
       <p>Are you sure to delete this?</p>    
   </div>    
@@ -43,7 +43,7 @@
 </div>
 </div>
 </ng-template>  
-<a routerLink="/new">
+<a routerLink="/add">
   <button class="add-button" >
   Add new workout
 </button>
