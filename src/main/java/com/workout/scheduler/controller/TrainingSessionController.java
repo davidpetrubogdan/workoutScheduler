@@ -27,25 +27,14 @@ public class TrainingSessionController {
     }
     @GetMapping("/trainings/{id}")
     TrainingSessionDTO one(@PathVariable Long id) {
-        TrainingSessionDTO trainingSessionDTO = trainingSessionService.findById(id) //
-                .orElseThrow(() -> new TrainingNotFoundException(id));
+        TrainingSessionDTO trainingSessionDTO = trainingSessionService.findById(id);
+              //  .orElseThrow(() -> new TrainingNotFoundException(id));
         return trainingSessionDTO;
     }
 
     @PutMapping("/trainings/{id}")
     TrainingSessionDTO replaceTraining(@RequestBody TrainingSessionDTO newTraining, @PathVariable Long id) {
-        TrainingSessionDTO updatedTraining = trainingSessionService.findById(id) //
-                .map(training -> {
-                    training.setDay(newTraining.getDay());
-                    training.setHours(newTraining.getHours());
-                    training.setType(newTraining.getType());
-                    return trainingSessionService.save(training);
-                }) //
-                .orElseGet(() -> {
-                    newTraining.setId(id);
-                    return trainingSessionService.save(newTraining);
-                });
-        return updatedTraining;
+        return trainingSessionService.update(newTraining,id);
     }
 
     @DeleteMapping("/trainings/{id}")

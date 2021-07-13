@@ -25,14 +25,28 @@ public class TrainingSessionService {
         //repository.findAll().stream().forEach(System.out::println);
         return repository.findAll().stream().map(Mapper::from).collect(Collectors.toList());
     }
-    public Optional<TrainingSessionDTO> findById(Long id){
-
-        Optional<TrainingSession> trainingSession = repository.findById(id);
+    public TrainingSessionDTO findById(Long id){
+        /*Optional<TrainingSession> trainingSession = repository.findById(id);
         if(trainingSession.isPresent())
             return Optional.of(Mapper.from(trainingSession.get()));
-        return Optional.ofNullable(null);
-        //TrainingSession trainingSession = repository.findById(id).orElseThrow(() -> new TrainingNotFoundException(id));
-        //return Mapper.from(trainingSession);
+        return Optional.ofNullable(null);*/
+        TrainingSession trainingSession = repository.findById(id).orElseThrow(() -> new TrainingNotFoundException(id));
+        return Mapper.from(trainingSession);
+    }
+    public TrainingSessionDTO update(TrainingSessionDTO newTrainingSessionDTO, Long id){
+        TrainingSession newTraining = Mapper.from(newTrainingSessionDTO);
+        TrainingSessionDTO updatedTraining = Mapper.from(repository.findById(id) //
+                .map(training -> {
+                    training.setDay(newTraining.getDay());
+                    training.setHours(newTraining.getHours());
+                    training.setType(newTraining.getType());
+                    return repository.save(training);
+                }) //
+                .orElseGet(() -> {
+                    newTraining.setId(id);
+                    return repository.save(newTraining);
+                }));
+        return updatedTraining;
     }
 
     public void deleteById(Long id){
