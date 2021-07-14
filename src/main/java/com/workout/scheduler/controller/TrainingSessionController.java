@@ -1,15 +1,14 @@
 package com.workout.scheduler.controller;
 
 import com.workout.scheduler.model.dto.TrainingSessionDTO;
-import com.workout.scheduler.service.TrainingNotFoundException;
 import com.workout.scheduler.service.TrainingSessionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
+
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequiredArgsConstructor(onConstructor=@__(@Autowired))
@@ -28,7 +27,6 @@ public class TrainingSessionController {
     @GetMapping("/trainings/{id}")
     TrainingSessionDTO one(@PathVariable Long id) {
         TrainingSessionDTO trainingSessionDTO = trainingSessionService.findById(id);
-              //  .orElseThrow(() -> new TrainingNotFoundException(id));
         return trainingSessionDTO;
     }
 
@@ -40,7 +38,5 @@ public class TrainingSessionController {
     @DeleteMapping("/trainings/{id}")
     void deleteTraining(@PathVariable Long id) {
         trainingSessionService.deleteById(id);
-
-     //   return ResponseEntity.noContent().build();
     }
 }
