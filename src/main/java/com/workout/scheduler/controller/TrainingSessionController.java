@@ -4,10 +4,15 @@ import com.workout.scheduler.model.dto.TrainingSessionDTO;
 import com.workout.scheduler.service.TrainingSessionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -20,6 +25,7 @@ public class TrainingSessionController {
     TrainingSessionDTO newTraining(@RequestBody TrainingSessionDTO newTraining) {
         return trainingSessionService.save(newTraining);
     }
+
     @GetMapping("/trainings")
     List<TrainingSessionDTO> all() {
         return trainingSessionService.findAll();

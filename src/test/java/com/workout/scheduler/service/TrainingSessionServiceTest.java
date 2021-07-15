@@ -145,6 +145,7 @@ public class TrainingSessionServiceTest {
         givenTrainingSession.setHours(2);
         givenTrainingSession.setId(1L);
         givenTrainingSession.setType(TrainingType.HIIT);
+
         try (MockedStatic<Mapper> theMock = Mockito.mockStatic(Mapper.class)) {
             theMock.when(() -> Mapper.from(givenTrainingSession))
                     .thenReturn(givenTrainingSessionDTO);

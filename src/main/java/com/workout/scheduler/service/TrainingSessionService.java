@@ -7,11 +7,18 @@ import com.workout.scheduler.model.dto.TrainingSessionDTO;
 import com.workout.scheduler.repository.TrainingSessionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,6 +31,7 @@ public class TrainingSessionService {
     public TrainingSessionDTO save(@Valid  TrainingSessionDTO trainingSessionDTO) {
         return Mapper.from(repository.save(Mapper.from(trainingSessionDTO)));
     }
+
 
     public List<TrainingSessionDTO> findAll() {
         return repository.findAll().stream().map(Mapper::from).collect(Collectors.toList());
