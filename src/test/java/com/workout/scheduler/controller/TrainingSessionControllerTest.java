@@ -132,7 +132,7 @@ public class TrainingSessionControllerTest {
         mockMvc.perform(get("/trainings/")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.size()").value(response.size()));
+                .andExpect(jsonPath("$.length()").value(response.size()));
 
     }
     @Test
