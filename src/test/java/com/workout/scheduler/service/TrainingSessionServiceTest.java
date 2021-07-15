@@ -52,6 +52,7 @@ public class TrainingSessionServiceTest {
         givenTrainingSession.setDay(DayOfWeek.SUNDAY);
         givenTrainingSession.setHours(2);
         givenTrainingSession.setType(TrainingType.HIIT);
+
         try (MockedStatic<Mapper> theMock = Mockito.mockStatic(Mapper.class)) {
             theMock.when(() -> Mapper.from(givenTrainingSession))
                     .thenReturn(givenTrainingSessionDTO);
@@ -61,6 +62,11 @@ public class TrainingSessionServiceTest {
             when(trainingSessionRepository.save(Mockito.any(TrainingSession.class))).thenAnswer(i -> i.getArguments()[0]);//thenReturn(new TrainingSession());
             TrainingSessionDTO created = trainingSessionService.save(givenTrainingSessionDTO);
             assertThat(created.getDay()).isSameAs(givenTrainingSessionDTO.getDay());
+            assertThat(created.getType()).isSameAs(givenTrainingSessionDTO.getType());
+            assertThat(created.getHours()).isSameAs(givenTrainingSessionDTO.getHours());
+
+            verify(trainingSessionRepository).save(givenTrainingSession);
+
         }
     }
     @Test
@@ -84,6 +90,10 @@ public class TrainingSessionServiceTest {
             when(trainingSessionRepository.findById(Mockito.any(Long.class))).thenReturn(java.util.Optional.of(givenTrainingSession));
             TrainingSessionDTO created = trainingSessionService.findById(givenTrainingSessionDTO.getId());
             assertThat(created.getDay()).isSameAs(givenTrainingSessionDTO.getDay());
+            assertThat(created.getType()).isSameAs(givenTrainingSessionDTO.getType());
+            assertThat(created.getHours()).isSameAs(givenTrainingSessionDTO.getHours());
+
+            verify(trainingSessionRepository).findById(givenTrainingSession.getId());
         }
     }
 
@@ -131,6 +141,11 @@ public class TrainingSessionServiceTest {
             when(trainingSessionRepository.save(Mockito.any(TrainingSession.class))).thenAnswer(i -> i.getArguments()[0]);
             TrainingSessionDTO created = trainingSessionService.update(givenTrainingSessionDTO,givenTrainingSessionDTO.getId());
             assertThat(created.getDay()).isSameAs(givenTrainingSessionDTO.getDay());
+            assertThat(created.getType()).isSameAs(givenTrainingSessionDTO.getType());
+            assertThat(created.getHours()).isSameAs(givenTrainingSessionDTO.getHours());
+
+            verify(trainingSessionRepository).findById(givenTrainingSession.getId());
+            verify(trainingSessionRepository).save(givenTrainingSession);
         }
     }
     @Test
@@ -155,6 +170,9 @@ public class TrainingSessionServiceTest {
             when(trainingSessionRepository.save(Mockito.any(TrainingSession.class))).thenAnswer(i -> i.getArguments()[0]);
             TrainingSessionDTO created = trainingSessionService.update(givenTrainingSessionDTO,givenTrainingSessionDTO.getId());
             assertThat(created.getDay()).isSameAs(givenTrainingSessionDTO.getDay());
+            assertThat(created.getDay()).isSameAs(givenTrainingSessionDTO.getDay());
+            assertThat(created.getType()).isSameAs(givenTrainingSessionDTO.getType());
+            assertThat(created.getHours()).isSameAs(givenTrainingSessionDTO.getHours());
         }
     }
     @Test
@@ -187,6 +205,7 @@ public class TrainingSessionServiceTest {
             when(trainingSessionRepository.findAll()).thenReturn(trainingSessionList);
             List<TrainingSessionDTO> created = trainingSessionService.findAll();
             assertThat(created.size()).isSameAs(trainingSessionDTOList.size());
+            verify(trainingSessionRepository).findAll();
         }
 
     }

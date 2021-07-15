@@ -70,7 +70,11 @@ public class TrainingSessionControllerTest {
                 .content(mapper.writeValueAsString(request))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.type").value(request.getType()));
+                .andExpect(jsonPath("$.type").value(request.getType()))
+                .andExpect(jsonPath("$.day").value(request.getDay()))
+                .andExpect(jsonPath("$.hours").value(request.getHours()));
+
+        verify(trainingSessionService).save(request);
 
     }
     @Test
@@ -116,7 +120,10 @@ public class TrainingSessionControllerTest {
               // .content(mapper.writeValueAsString(request))
                .contentType(MediaType.APPLICATION_JSON))
                .andExpect(status().isOk())
-               .andExpect(jsonPath("$.type").value(request.getType()));
+               .andExpect(jsonPath("$.type").value(request.getType()))
+               .andExpect(jsonPath("$.day").value(request.getDay()))
+               .andExpect(jsonPath("$.hours").value(request.getHours()));
+       verify(trainingSessionService).findById(request.getId());
 
    }
 
@@ -133,6 +140,8 @@ public class TrainingSessionControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(response.size()));
+
+        verify(trainingSessionService).findAll();
 
     }
     @Test
@@ -155,8 +164,10 @@ public class TrainingSessionControllerTest {
                 .content(mapper.writeValueAsString(request))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.day").value(response.getDay()));
-
+                .andExpect(jsonPath("$.day").value(response.getDay()))
+                .andExpect(jsonPath("$.type").value(request.getType()))
+                .andExpect(jsonPath("$.hours").value(request.getHours()));
+        verify(trainingSessionService).update(request,request.getId());
     }
 
     @Test
