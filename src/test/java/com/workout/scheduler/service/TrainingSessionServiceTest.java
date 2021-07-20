@@ -6,7 +6,6 @@ import com.workout.scheduler.model.TrainingType;
 import com.workout.scheduler.model.dto.Mapper;
 import com.workout.scheduler.model.dto.TrainingSessionDTO;
 import com.workout.scheduler.repository.TrainingSessionRepository;
-import com.workout.scheduler.service.TrainingSessionService;
 import org.junit.Rule;
 import org.junit.jupiter.api.Test;
 import org.junit.rules.ExpectedException;
@@ -16,24 +15,18 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.stubbing.Answer;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import javax.validation.ConstraintDeclarationException;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static org.hamcrest.Matchers.any;
-import static org.mockito.AdditionalAnswers.returnsFirstArg;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 @SpringBootTest
-public class TrainingSessionServiceTest {
+class TrainingSessionServiceTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -43,7 +36,7 @@ public class TrainingSessionServiceTest {
     TrainingSessionService trainingSessionService;
 
     @Test
-    public void createTrainingSuccessfully() throws Exception {
+    void createTrainingSuccessfully() {
         TrainingSessionDTO givenTrainingSessionDTO = new TrainingSessionDTO();
         givenTrainingSessionDTO.setType("HIIT");
         givenTrainingSessionDTO.setDay("SUNDAY");
@@ -70,7 +63,7 @@ public class TrainingSessionServiceTest {
         }
     }
     @Test
-    public void findByIdTest() throws Exception {
+    void findByIdTest() {
         TrainingSessionDTO givenTrainingSessionDTO = new TrainingSessionDTO();
         givenTrainingSessionDTO.setType("HIIT");
         givenTrainingSessionDTO.setDay("SUNDAY");
@@ -98,7 +91,7 @@ public class TrainingSessionServiceTest {
     }
 
     @Test
-    public void findByIdExceptionTest() throws Exception {
+    void findByIdExceptionTest(){
 
         TrainingSessionDTO givenTrainingSessionDTO = new TrainingSessionDTO();
         givenTrainingSessionDTO.setType("HIIT");
@@ -121,7 +114,7 @@ public class TrainingSessionServiceTest {
     }
 
     @Test
-    public void updateEntityFoundTest() throws Exception {
+    void updateEntityFoundTest() {
         TrainingSessionDTO givenTrainingSessionDTO = new TrainingSessionDTO();
         givenTrainingSessionDTO.setType("HIIT");
         givenTrainingSessionDTO.setDay("SUNDAY");
@@ -132,13 +125,16 @@ public class TrainingSessionServiceTest {
         givenTrainingSession.setHours(2);
         givenTrainingSession.setId(1L);
         givenTrainingSession.setType(TrainingType.HIIT);
+
         try (MockedStatic<Mapper> theMock = Mockito.mockStatic(Mapper.class)) {
             theMock.when(() -> Mapper.from(givenTrainingSession))
                     .thenReturn(givenTrainingSessionDTO);
             theMock.when(() -> Mapper.from(givenTrainingSessionDTO))
                     .thenReturn(givenTrainingSession);
+
             when(trainingSessionRepository.findById(Mockito.any(Long.class))).thenReturn(java.util.Optional.of(givenTrainingSession));
             when(trainingSessionRepository.save(Mockito.any(TrainingSession.class))).thenAnswer(i -> i.getArguments()[0]);
+
             TrainingSessionDTO created = trainingSessionService.update(givenTrainingSessionDTO,givenTrainingSessionDTO.getId());
             assertThat(created.getDay()).isSameAs(givenTrainingSessionDTO.getDay());
             assertThat(created.getType()).isSameAs(givenTrainingSessionDTO.getType());
@@ -149,7 +145,7 @@ public class TrainingSessionServiceTest {
         }
     }
     @Test
-    public void updateEntityNotFoundTest() throws Exception {
+    void updateEntityNotFoundTest() {
         TrainingSessionDTO givenTrainingSessionDTO = new TrainingSessionDTO();
         givenTrainingSessionDTO.setType("HIIT");
         givenTrainingSessionDTO.setDay("SUNDAY");
@@ -176,7 +172,7 @@ public class TrainingSessionServiceTest {
         }
     }
     @Test
-    public void findAllTest(){
+    void findAllTest(){
         List<TrainingSessionDTO> trainingSessionDTOList = new ArrayList<>();
 
         TrainingSessionDTO givenTrainingSessionDTO = new TrainingSessionDTO();
@@ -211,7 +207,7 @@ public class TrainingSessionServiceTest {
     }
 
     @Test
-    public void deleteTest(){
+    void deleteTest(){
         TrainingSession givenTrainingSession = new TrainingSession();
         givenTrainingSession.setDay(DayOfWeek.SUNDAY);
         givenTrainingSession.setHours(2);

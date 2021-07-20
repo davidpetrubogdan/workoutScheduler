@@ -4,15 +4,8 @@ import com.workout.scheduler.model.dto.TrainingSessionDTO;
 import com.workout.scheduler.service.TrainingSessionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -22,27 +15,26 @@ public class TrainingSessionController {
     private TrainingSessionService trainingSessionService;
 
     @PostMapping("/trainings")
-    TrainingSessionDTO newTraining(@RequestBody TrainingSessionDTO newTraining) {
+    public TrainingSessionDTO newTraining(@RequestBody TrainingSessionDTO newTraining) {
         return trainingSessionService.save(newTraining);
     }
 
     @GetMapping("/trainings")
-    List<TrainingSessionDTO> all() {
+    public List<TrainingSessionDTO> all() {
         return trainingSessionService.findAll();
     }
     @GetMapping("/trainings/{id}")
-    TrainingSessionDTO one(@PathVariable Long id) {
-        TrainingSessionDTO trainingSessionDTO = trainingSessionService.findById(id);
-        return trainingSessionDTO;
+    public TrainingSessionDTO one(@PathVariable Long id) {
+        return trainingSessionService.findById(id);
     }
 
     @PutMapping("/trainings/{id}")
-    TrainingSessionDTO replaceTraining(@RequestBody TrainingSessionDTO newTraining, @PathVariable Long id) {
+    public TrainingSessionDTO replaceTraining(@RequestBody TrainingSessionDTO newTraining, @PathVariable Long id) {
         return trainingSessionService.update(newTraining,id);
     }
 
     @DeleteMapping("/trainings/{id}")
-    void deleteTraining(@PathVariable Long id) {
+    public void deleteTraining(@PathVariable Long id) {
         trainingSessionService.deleteById(id);
     }
 }

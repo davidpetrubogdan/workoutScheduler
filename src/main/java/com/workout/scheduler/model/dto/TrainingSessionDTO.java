@@ -16,7 +16,6 @@ public class TrainingSessionDTO {
     private Integer hours;
     @NotEmpty
     private String type;
-    //private Date date;
     @NotEmpty
     private String day;
 }
