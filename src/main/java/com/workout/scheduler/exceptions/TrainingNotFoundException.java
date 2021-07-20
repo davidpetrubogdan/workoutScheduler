@@ -1,4 +1,4 @@
-package com.workout.scheduler.service;
+package com.workout.scheduler.exceptions;
 
 public class TrainingNotFoundException extends RuntimeException {
 
