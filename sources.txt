@@ -1,0 +1,13 @@
+./src/main/java/com/workout/scheduler/service/TrainingSessionService.java
+./src/main/java/com/workout/scheduler/repository/TrainingSessionRepository.java
+./src/main/java/com/workout/scheduler/SchedulerApplication.java
+./src/main/java/com/workout/scheduler/LoadDatabase.java
+./src/main/java/com/workout/scheduler/exceptions/TrainingNotFoundException.java
+./src/main/java/com/workout/scheduler/model/TrainingSession.java
+./src/main/java/com/workout/scheduler/model/dto/TrainingSessionDTO.java
+./src/main/java/com/workout/scheduler/model/dto/Mapper.java
+./src/main/java/com/workout/scheduler/model/TrainingType.java
+./src/main/java/com/workout/scheduler/controller/TrainingSessionController.java
+./src/test/java/com/workout/scheduler/service/TrainingSessionServiceTest.java
+./src/test/java/com/workout/scheduler/model/dto/MapperTest.java
+./src/test/java/com/workout/scheduler/controller/TrainingSessionControllerTest.java

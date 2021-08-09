@@ -66,7 +66,7 @@ class TrainingSessionControllerTest {
                 .andExpect(jsonPath("$.hours").value(request.getHours()));
 
         verify(trainingSessionService).save(request);
-
+        System.out.println("CEVA");
     }
 
     @Test
