@@ -87,6 +87,7 @@ class TrainingSessionServiceTest {
             assertThat(created.getHours()).isSameAs(givenTrainingSessionDTO.getHours());
 
             verify(trainingSessionRepository).findById(givenTrainingSession.getId());
+
         }
     }
 
